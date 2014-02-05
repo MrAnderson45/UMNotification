@@ -1,0 +1,24 @@
+#!/bin/bash
+# Date: 02/05/2014
+# Author: Alonso Vazquez
+# Version: 2.0.0
+# Description: Shows the number of available updates when the computer starts.
+# The system must to be updated manually and the repositories too.
+
+CONT=0
+TOTAL=0
+
+
+for i in $( pacman -Qu ) ; do
+		let CONT=CONT+1
+done
+
+TOTAL=$[$CONT/2]
+
+if [ $CONT -eq 0 ]
+then
+	notify-send -i update-manager "Administrador de Actualizaciones" "No hay actualizaciones disponibles."
+else
+	notify-send -i update-manager "Administrador de Actualizaciones" "Hay $TOTAL actualizaciones disponibles."
+fi
+
